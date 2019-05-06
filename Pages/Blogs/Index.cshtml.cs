@@ -41,7 +41,7 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
             Blogs = _context.Blog.ToList();
             BlogsDropDown=new SelectList(Blogs, "BlogId", "Title");
 
-          BlogPosts= _context.Blog.Include(b => b.Post).Where(x => x.BlogId == b.BlogId).AsQueryable();
+          BlogPosts= _context.Blog.Include(b => b.Post).Where(x => x.BlogId == b.BlogId).ToList();
         }
 
 
