@@ -1,0 +1,52 @@
+@page
+@model CIDM3312_FinalProjectBlog.Pages_Blogs.IndexModel
+
+@{
+    ViewData["Title"] = "Blog Page";
+}
+
+<h1>Blogs Page</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Blogs[0].Title)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Blogs) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+               
+
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.BlogId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.BlogId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.BlogId">Delete</a>
+            </td>
+        </tr>
+}      <form method="post">
+        <div class="form-group">
+        <label class="control-label"></label>
+        <select asp-items="Model.BlogsDropDown" class="form-control">
+            <option value="">-- Select Blog --</option>
+        </select>
+        </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+
+        <p> @Model.BlogPosts</p>  
+        </form>
+
+
+    </tbody>
+</table>
