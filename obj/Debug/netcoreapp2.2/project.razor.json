@@ -2774,6 +2774,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Pages\\Blogs\\Comments.cshtml",
+      "TargetPath": "Pages\\Blogs\\Comments.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Pages\\Blogs\\Delete.cshtml",
       "TargetPath": "Pages\\Blogs\\Delete.cshtml",
       "FileKind": "mvc"

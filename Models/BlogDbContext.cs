@@ -9,5 +9,6 @@ namespace CIDM3312_FinalProjectBlog.Models
 		{
 		}
 		public DbSet<Blog> Blog {get; set;}
+		public DbSet<Post> Post {get; set;}
 	}
 }

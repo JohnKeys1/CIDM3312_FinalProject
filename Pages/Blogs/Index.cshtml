@@ -36,7 +36,7 @@
 }      <form method="post">
         <div class="form-group">
         <label class="control-label"></label>
-        <select asp-items="Model.BlogsDropDown" class="form-control">
+        <select asp-items="Model.BlogsDropDown" asp-for="BlogID" class="form-control">
             <option value="">-- Select Blog --</option>
         </select>
         </div>
@@ -44,9 +44,29 @@
                 <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
 
-        <p> @Model.BlogPosts</p>  
+         
         </form>
-
+    
 
     </tbody>
+    
 </table>
+
+@if (Model.BlogPosts != null)
+{
+    @foreach (var blog in Model.BlogPosts)
+    {
+        @foreach (var post in blog.Post)
+        {
+            <form method="post">
+            <input type ="hidden" name ="PostId" value = "@post.PostId">
+            <p>@post.content</p> <input type="submit" class="btn btn-secondary" value="Like" />
+            <ul>
+                <li>@post.comment</li>
+                 <li>@post.likes</li>
+
+            </ul>
+            </form>
+        }
+    }
+}

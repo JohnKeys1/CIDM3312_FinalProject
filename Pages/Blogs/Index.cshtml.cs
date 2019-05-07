@@ -21,9 +21,15 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
 
         public IList<Blog> Blogs { get;set; }
         public SelectList BlogsDropDown{ get; set; }
+        
         public Blog b { get; set; }
+            [BindProperty]
+        public int BlogID  { get; set; }
+         [BindProperty]
+        public int PostId  { get; set; }
 
        public IList<Blog> BlogPosts { get; set; }
+       public Post selectedPost { get; set; }
 
 
         public void  OnGet()
@@ -36,12 +42,18 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
 
         public void OnPost()
         {
-           // b = _context.Blog.Include(b => b.Post).Where(x => x.BlogId == b.BlogId);
+         //  b = _context.Blog.Include(b => b.Post).Where(x => x.BlogId == b.BlogId).SingleOrDefault();
 
             Blogs = _context.Blog.ToList();
             BlogsDropDown=new SelectList(Blogs, "BlogId", "Title");
 
-          BlogPosts= _context.Blog.Include(b => b.Post).Where(x => x.BlogId == b.BlogId).ToList();
+          BlogPosts= _context.Blog.Include(b => b.Post).Where(x => x.BlogId == BlogID).ToList();
+          selectedPost=_context.Post.Where(x => x.PostId == PostId).SingleOrDefault();
+          if (selectedPost != null)
+          {
+          selectedPost.likes+=1;
+         _context.SaveChanges();
+          }
         }
 
 

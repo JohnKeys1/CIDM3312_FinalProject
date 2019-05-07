@@ -34,3 +34,4 @@ E:\cidm3312\CIDM3312_FinalProjectBlog\obj\Debug\netcoreapp2.2\Razor\Pages\Blogs\
 E:\cidm3312\CIDM3312_FinalProjectBlog\obj\Debug\netcoreapp2.2\Razor\Pages\Blogs\Edit.g.cshtml.cs
 E:\cidm3312\CIDM3312_FinalProjectBlog\obj\Debug\netcoreapp2.2\Razor\Pages\Blogs\Index.g.cshtml.cs
 E:\cidm3312\CIDM3312_FinalProjectBlog\obj\Debug\netcoreapp2.2\Razor\Pages\Shared\_LayoutCreative.g.cshtml.cs
+E:\cidm3312\CIDM3312_FinalProjectBlog\obj\Debug\netcoreapp2.2\Razor\Pages\Blogs\Comments.g.cshtml.cs
