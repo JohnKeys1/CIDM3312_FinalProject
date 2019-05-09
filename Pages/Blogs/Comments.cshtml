@@ -1,4 +1,4 @@
-@page 
+@page "{searchString?}"
 @model CIDM3312_FinalProjectBlog.Pages_Blogs.CommentsModel
 
 @{
@@ -30,10 +30,72 @@
         </form>
     </div>
 </div>
-
+ <form>
+    <p>
+       <select asp-for="CurrentSort" asp-items="Model.SortList">
+		<option value="">sort by...</option>
+	</select>
+	<button type="submit">Sort</button>
+</form> 
+<form>
+    <p>
+        Heading: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+     <!-- @{
+                    var firstSort = "first_asc";
+                    if (Model.CurrentSort == "first_asc")
+                    {
+                        firstSort = "first_desc";
+                    }
+      }
+    <a asp-page="./Blogs/Comments" asp-route-CurrentSort="@firstSort"> </a> -->
+    
+    
+     @foreach (var blog in Model.AllPosts)
+    {
+        @foreach (var post in blog.Post)
+        {
+           
+                 <div class="container"> 
+                    <div class="row"> 
+                        <div class="col">
+                            <form method="post">
+                            <input type ="hidden" name ="PostId" value = "@post.PostId">
+                       <h1>@post.heading</h1> <h4>By @post.author </h4>    <p>  <br/> @post.content</p> <br/> <input type="submit" class="btn btn-primary" value="Like" />
+                            <ul>
+                                <div class="col"><li>comment: @post.comment</li></div>
+                                <div class="col"><li>@post.likes likes</li></div>
+                            </ul>
+                            </form>
+                        </div> 
+                    </div>
+                </div> 
+        }
+    }
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
+@{
+    var prevDisabled = "";
+    if (Model.PageNum <= 1) {
+        prevDisabled = "disabled";
+    }
+}
+@{
+    var nextDisabled = "";
+    if (Model.PageNum >2 )
+     {
+        nextDisabled = "disabled";
+    }
+}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item @prevDisabled"><a class="page-link" asp-page="./Blogs/Comments" asp-route-PageNum="@(Model.PageNum - 1)"asp-route-CurrentSort="@Model.CurrentSort">Previous</a></li>
+    <li class="page-item @nextDisabled"><a class="page-link" asp-page="./Blogs/Comments" asp-route-PageNum="@(Model.PageNum + 1)"asp-route-CurrentSort="@Model.CurrentSort">Next</a></li>
+  </ul>
+</nav>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

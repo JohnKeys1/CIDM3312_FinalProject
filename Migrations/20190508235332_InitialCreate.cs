@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CIDM3312_FinalProjectBlog.Migrations
 {
@@ -28,7 +27,6 @@ namespace CIDM3312_FinalProjectBlog.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     heading = table.Column<string>(nullable: true),
                     content = table.Column<string>(nullable: true),
-                    createTime = table.Column<DateTime>(nullable: false),
                     comment = table.Column<string>(nullable: true),
                     likes = table.Column<int>(nullable: false),
                     author = table.Column<string>(nullable: true),

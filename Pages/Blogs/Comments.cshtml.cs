@@ -20,11 +20,22 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
         public int PostId {get; set;}
         [BindProperty]
         public string Comment {get; set;}
-        
-        // [BindProperty]
-        //public Post Post{ get; set; }
+        public IList<Blog> AllPosts { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int PageNum { get; set;} = 1;
 
-        // Drop down SelectList of Posts
+        [BindProperty(SupportsGet = true)]
+        public int PageSize {get; set;} = 2;
+
+        [BindProperty(SupportsGet = true)]
+        public string CurrentSort {get; set;}
+             
+        public SelectList SortList {get; set;}
+        
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
+       
+        public IList<Post> Post{ get; set; }
         public SelectList PostSelectList {get; set;}
 
         public CommentsModel(CIDM3312_FinalProjectBlog.Models.BlogDbContext context, ILogger<CommentsModel> logger)
@@ -33,11 +44,43 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
             _logger = logger;
         }
 
-        public IActionResult OnGet(int? id)
+        public IActionResult OnGet()
         {
             // Get a list of posts.
-            PostSelectList = new SelectList(_context.Post.Include(p=>p.Blog).ToList(), "PostId", "heading",id);
-            return Page();
+            PostSelectList = new SelectList(_context.Post.Include(p=>p.Blog).ToList(), "PostId", "heading");
+            AllPosts=_context.Blog.Include(p=>p.Post).ToList();
+
+             var blogs= from b in _context.Post
+                 select b;
+             if (!string.IsNullOrEmpty(SearchString))
+            {  
+                 blogs = _context.Post.Where(p => p.heading.Contains(SearchString));
+             }
+               
+             
+
+             //var query = _context.Post.Select(p => p);
+            List<SelectListItem> sortItems = new List<SelectListItem> {
+                new SelectListItem { Text = "Posts Ascending", Value = "post_asc" },
+                new SelectListItem { Text = "Posts Descending", Value = "post_desc"},
+               
+
+            };
+            SortList = new SelectList(sortItems, "Value", "Text", CurrentSort);
+
+            switch (CurrentSort)
+            {
+                case "post_asc":
+                   blogs = blogs.OrderBy(m => m.heading);
+                    break;
+                case "post_desc":
+                  blogs = blogs.OrderByDescending(m => m.heading);
+                    break;
+            }
+            Post = blogs.Skip((PageNum-1)*PageSize).Take(PageSize).ToList();
+
+           return Page();
+
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -53,7 +96,7 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
             Post PostToModify = _context.Post.Where(p => p.PostId == PostId).FirstOrDefault();
             PostToModify.comment = Comment;
 
-            //_context.Post.Add(Comment); 
+            
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

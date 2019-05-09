@@ -13,7 +13,6 @@ namespace CIDM3312_FinalProjectBlog.Models
         public int PostId {get; set;}
         public string heading {get; set;}
         public string content {get; set;}
-        public DateTime createTime{get; set;}
         public string comment {get; set;}
         public int likes {get; set;}
         public string author {get; set;}
