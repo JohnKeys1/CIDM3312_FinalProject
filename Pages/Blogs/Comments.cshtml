@@ -53,11 +53,9 @@
     <a asp-page="./Blogs/Comments" asp-route-CurrentSort="@firstSort"> </a> -->
     
     
-     @foreach (var blog in Model.AllPosts)
-    {
-        @foreach (var post in blog.Post)
+    
+        @foreach (var post in Model.Post)
         {
-           
                  <div class="container"> 
                     <div class="row"> 
                         <div class="col">
@@ -73,7 +71,7 @@
                     </div>
                 </div> 
         }
-    }
+    
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
@@ -85,15 +83,15 @@
 }
 @{
     var nextDisabled = "";
-    if (Model.PageNum >2 )
+    if (Model.PageNum >5 )
      {
         nextDisabled = "disabled";
     }
 }
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item @prevDisabled"><a class="page-link" asp-page="./Blogs/Comments" asp-route-PageNum="@(Model.PageNum - 1)"asp-route-CurrentSort="@Model.CurrentSort">Previous</a></li>
-    <li class="page-item @nextDisabled"><a class="page-link" asp-page="./Blogs/Comments" asp-route-PageNum="@(Model.PageNum + 1)"asp-route-CurrentSort="@Model.CurrentSort">Next</a></li>
+    <li class="page-item @prevDisabled"><a class="page-link" asp-page="./Comments" asp-route-PageNum="@(Model.PageNum - 1)"asp-route-CurrentSort="@Model.CurrentSort">Previous</a></li>
+    <li class="page-item @nextDisabled"><a class="page-link" asp-page="./Comments" asp-route-PageNum="@(Model.PageNum + 1)"asp-route-CurrentSort="@Model.CurrentSort">Next</a></li>
   </ul>
 </nav>
 

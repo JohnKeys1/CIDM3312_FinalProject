@@ -25,7 +25,7 @@ namespace CIDM3312_FinalProjectBlog.Pages_Blogs
         public int PageNum { get; set;} = 1;
 
         [BindProperty(SupportsGet = true)]
-        public int PageSize {get; set;} = 2;
+        public int PageSize {get; set;} = 6;
 
         [BindProperty(SupportsGet = true)]
         public string CurrentSort {get; set;}

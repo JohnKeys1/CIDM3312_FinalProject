@@ -37,8 +37,6 @@
         <select asp-items="Model.BlogsDropDown" asp-for="BlogID" class="form-control">
             <option value="">-- Select Category--</option>
         </select>
-
-       
         </div>
             <div class="form-group">
                 <input type="submit" value="Submit" class="btn btn-primary" />
@@ -50,8 +48,9 @@
 
 @if (Model.BlogPosts != null)
 {
-    @foreach (var blog in Model.BlogPosts)
-    {
+            @foreach (var blog in Model.BlogPosts){ 
+                
+           
         @foreach (var post in blog.Post)
         {
            
@@ -70,8 +69,30 @@
                     </div>
                 </div> 
         }
-    }
-
+    
+            }
     
 }
+</div>
+<!-- I did not use paging on this page because whenever I made paging work it broke the dropdownn function for categories. -->
+<!--  @{
+    var prevDisabled = "";
+    if (Model.PageNum <= 1) {
+        prevDisabled = "disabled";
+    }
+}
+@{
+    var nextDisabled = "";
+    if (Model.PageNum >6 )
+     {
+        nextDisabled = "disabled";
+    }
+}
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item @prevDisabled"><a class="page-link" asp-page="./Index" asp-route-PageNum="@(Model.PageNum - 1)"asp-route-CurrentSort="@Model.CurrentSort">Previous</a></li>
+    <li class="page-item @nextDisabled"><a class="page-link" asp-page="./Index" asp-route-PageNum="@(Model.PageNum + 1)"asp-route-CurrentSort="@Model.CurrentSort">Next</a></li>
+  </ul>
+</nav>
 
+ -->

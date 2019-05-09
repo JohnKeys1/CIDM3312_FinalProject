@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CIDM3312_FinalProjectBlog.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20190508235332_InitialCreate")]
+    [Migration("20190509012435_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
